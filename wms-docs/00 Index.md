@@ -17,6 +17,17 @@ procedures are in `SKILL.md` (both at the repo root).
 - [[architecture]] — how it fits together
 - [[glossary]] — WMS terms and their code names
 
+## Scope
+
+- [[roadmap]] — milestones M0–M5 and who builds what
+- [[roles-permissions]] — admin / manager / operator capability matrix
+- [[non-functional]] — security, integrity, performance, handheld UX targets
+- Modules (draft): [[modules/01-tenancy-users]] · [[modules/02-master-data]] ·
+  [[modules/03-vehicles-yard]] · [[modules/04-inbound-receiving]] ·
+  [[modules/05-putaway]] · [[modules/06-inventory]] · [[modules/07-outbound]] ·
+  [[modules/08-rfid]] · [[modules/09-integrations-labels]] ·
+  [[modules/10-reporting-audit]]
+
 ## Decisions
 
 - [[_meta/decisions/001-stack-django-react]] — Django + React + PostgreSQL (accepted)

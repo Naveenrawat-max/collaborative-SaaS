@@ -39,6 +39,10 @@ machine. So:
 | `SKILL.md` | Capabilities and step-by-step procedures (start, handoff, ADR, spec) | When a procedure changes |
 | `wms-docs/STATE.md` | **Live status**: done, in progress, next, blockers | Every session, through a handoff |
 | `wms-docs/product.md` | What the product does: modules, roles, scope | When scope changes |
+| `wms-docs/modules/` | Scope of each module: in/out of scope, entities, flows, open questions | When a module's scope changes |
+| `wms-docs/roadmap.md` | Milestones M0–M5, delivery order | When the plan changes |
+| `wms-docs/roles-permissions.md` | admin / manager / operator capability matrix | When permissions change |
+| `wms-docs/non-functional.md` | Security, integrity, performance, UX targets | When targets change |
 | `wms-docs/architecture.md` | How the system is built | When the structure changes |
 | `wms-docs/glossary.md` | WMS terms — use these names in code | When a new term appears |
 | `wms-docs/_meta/decisions/` | ADRs: why we chose X over Y | Whenever a decision is made |

@@ -24,17 +24,20 @@ vocabulary is in [[glossary]].
 
 ## Modules (draft — proposed scope, confirm with the team)
 
-| Module | Covers | Spec |
-|---|---|---|
-| Tenancy and users | tenants, users, roles, warehouse access | — |
-| Master data | warehouses, zones, locations, SKUs/items, units, partners (suppliers, customers, carriers) | — |
-| Vehicle inbound | gate-in, yard, dock appointment, unloading, ASN check, receiving | — |
-| Putaway | suggested location, confirm move into storage | — |
-| Inventory | stock per location/lot, moves, adjustments, cycle counts, movement history | — |
-| Outbound | orders, wave/batch, picking, packing, loading, dispatch, gate-out | — |
-| RFID (optional) | reader/antenna config, tag ↔ item/pallet binding, read events → transactions | — |
-| Reporting | stock levels, throughput, dock utilisation, audit | — |
+| # | Module | Covers | Milestone | Spec |
+|---|---|---|---|---|
+| 01 | [[modules/01-tenancy-users]] | tenants, users, roles, warehouse access | M0 | — |
+| 02 | [[modules/02-master-data]] | warehouses, zones, locations, docks, items, partners | M0 | — |
+| 03 | [[modules/03-vehicles-yard]] | appointments, gate-in/out, yard, dock assignment | M1 | — |
+| 04 | [[modules/04-inbound-receiving]] | ASN, receiving, discrepancies, quality hold | M1 | — |
+| 05 | [[modules/05-putaway]] | putaway tasks, location suggestion | M1 | — |
+| 06 | [[modules/06-inventory]] | stock, movement service, moves, adjustments, counts, lots, holds | M1–M2 | — |
+| 07 | [[modules/07-outbound]] | orders, allocation, waves, pick, pack, load, dispatch | M3 | — |
+| 08 | [[modules/08-rfid]] | readers, gateway, tag binding, RFID use cases (optional) | M4 | — |
+| 09 | [[modules/09-integrations-labels]] | CSV, REST API, webhooks, labels, documents | M1/M5 | — |
+| 10 | [[modules/10-reporting-audit]] | audit log, dashboards, reports | M0/M5 | — |
 
+Delivery order: [[roadmap]]. Quality targets for all modules: [[non-functional]].
 Add the spec link to the table when a spec is written in `wms-docs/specs/`.
 
 ## Roles (draft — finalise the permission matrix before the first spec)
@@ -44,6 +47,8 @@ Add the spec link to the table when a spec is written in `wms-docs/specs/`.
 | `admin` | the whole tenant | users and roles, warehouses, master data, tenant settings (e.g. RFID on/off) |
 | `manager` | assigned warehouses | plan inbound/outbound, approve adjustments, view reports |
 | `operator` | assigned warehouse, on a handheld | scan, receive, putaway, pick, pack, load, count |
+
+Full capability matrix: [[roles-permissions]].
 
 Open question: is there a platform-level super-admin (our team) above tenant
 admins? → track in [[STATE]] under Open decisions.

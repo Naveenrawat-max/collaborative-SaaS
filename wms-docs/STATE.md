@@ -11,7 +11,7 @@ tags:
 **Read this first, every session. Update it at every handoff** (procedure C2 in
 `SKILL.md`). Each dev edits only their own lines, and the Log is append-only.
 
-- **Version:** 0.1.0 (see `VERSION`)
+- **Version:** 0.1.1 (see `VERSION`)
 - **Phase:** 0 — project setup. No application code yet.
 - **Stack:** Django + React + PostgreSQL — [[_meta/decisions/001-stack-django-react]]
 
@@ -23,11 +23,11 @@ tags:
 | Harshit | _TBD_ | — |
 | Joseph | _TBD_ | — |
 
-Proposed split (agree, then fill in the table above). Module names come from
-[[product]]:
-- **A**: inbound — vehicles, gate, dock, receiving, putaway
-- **B**: inventory — locations, stock, moves, counts, RFID
-- **C**: outbound — orders, picking, packing, loading — plus tenancy and auth
+Proposed split (agree, then fill in the table above). Details: [[roadmap]].
+- **A**: modules 03 vehicles/yard, 04 inbound, 05 putaway
+- **B**: modules 02 master data, 06 inventory, 08 RFID
+- **C**: modules 01 tenancy/users, 07 outbound, 09 integrations
+- Shared: module 10 reporting/audit
 
 ## In progress
 
@@ -37,7 +37,7 @@ _Nothing yet._ Format: `- <dev> · <branch> · <spec link> — status, exact nex
 
 1. **Agree on ADR-002 multi-tenancy** → [[_meta/decisions/002-multi-tenancy]]. This blocks all models.
 2. Assign module ownership (table above).
-3. Define the role-permission matrix for admin, manager, and operator → in [[product]].
+3. Review the draft scope: each module's open questions in `modules/`, the [[roles-permissions]] matrix, and the [[non-functional]] targets (especially **handheld offline: yes/no**).
 4. Confirm the API style (Django REST Framework?) and frontend tooling (Vite?) → write ADR-003.
 5. Scaffold the Django project, React app, Postgres in docker-compose, and CI.
 6. First spec: tenancy + users + roles.
@@ -65,8 +65,10 @@ _None._
 
 ## Done
 
+- 2026-10-08 — Draft scope: 10 module notes, roles-permissions matrix, roadmap M0–M5, non-functional requirements.
 - 2026-10-08 — Project context scaffold: AGENTS.md, SKILL.md, the `wms-docs` vault, ADR-001, ADR-002 (proposed).
 
 ## Log (newest first)
 
+- 2026-10-08 · setup · `chore/project-context` — Added draft scope for every module (`modules/01–10`), [[roles-permissions]], [[roadmap]], and [[non-functional]]. Each module lists its open questions. Next: team reviews the scope and ADR-002 on PR #1.
 - 2026-10-08 · setup · `chore/project-context` — Set up the shared-context system: rules for all agents (AGENTS.md), procedures (SKILL.md), this STATE file, product/architecture/glossary notes, ADR-001 (Django + React + Postgres), and ADR-002 tenancy (proposed). Next: agree on ADR-002 and module owners.
