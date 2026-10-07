@@ -36,6 +36,7 @@ procedures are in `SKILL.md` (both at the repo root).
 
 ## Specs
 
+- [[specs/001-rfid-wms-pilot-design]] — **pilot goal, scope by phase, RFID design** (draft, under review)
 - [[specs/000-template]] — copy this before building a feature
 
 ## Meta

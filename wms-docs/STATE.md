@@ -1,5 +1,5 @@
 ---
-title: "STATE — live project status"
+title: STATE — live project status
 tags:
   - kind/map
   - role/hub
@@ -11,7 +11,7 @@ tags:
 **Read this first, every session. Update it at every handoff** (procedure C2 in
 `SKILL.md`). Each dev edits only their own lines, and the Log is append-only.
 
-- **Version:** 0.1.1 (see `VERSION`)
+- **Version:** 0.1.2 (see `VERSION`)
 - **Phase:** 0 — project setup. No application code yet.
 - **Stack:** Django + React + PostgreSQL — [[_meta/decisions/001-stack-django-react]]
 
@@ -35,6 +35,7 @@ _Nothing yet._ Format: `- <dev> · <branch> · <spec link> — status, exact nex
 
 ## Next up (in order)
 
+0. **Review [[specs/001-rfid-wms-pilot-design]]** (pilot goal, RFID mandatory, QR fallback). After approval: update notes per its section 10 and write ADR-003 to ADR-006.
 1. **Agree on ADR-002 multi-tenancy** → [[_meta/decisions/002-multi-tenancy]]. This blocks all models.
 2. Assign module ownership (table above).
 3. Review the draft scope: each module's open questions in `modules/`, the [[roles-permissions]] matrix, and the [[non-functional]] targets (especially **handheld offline: yes/no**).
@@ -65,10 +66,12 @@ _None._
 
 ## Done
 
+- 2026-10-08 — Spec-001 drafted: RFID-mandatory pilot goal, phased scope, architecture (native C72 app + trc-rfid), tag identity (EPC+TID, QR fallback).
 - 2026-10-08 — Draft scope: 10 module notes, roles-permissions matrix, roadmap M0–M5, non-functional requirements.
 - 2026-10-08 — Project context scaffold: AGENTS.md, SKILL.md, the `wms-docs` vault, ADR-001, ADR-002 (proposed).
 
 ## Log (newest first)
 
+- 2026-10-08 · setup · `chore/project-context` — Brainstormed with web research: RFID is now **mandatory**, with QR (EPC+TID) fallback; Chainway C72 + trc-rfid; native Kotlin operator app; own-warehouse tenants first. Wrote [[specs/001-rfid-wms-pilot-design]]. Older notes still say "RFID optional" until the spec is approved and section 10 is applied.
 - 2026-10-08 · setup · `chore/project-context` — Added draft scope for every module (`modules/01–10`), [[roles-permissions]], [[roadmap]], and [[non-functional]]. Each module lists its open questions. Next: team reviews the scope and ADR-002 on PR #1.
 - 2026-10-08 · setup · `chore/project-context` — Set up the shared-context system: rules for all agents (AGENTS.md), procedures (SKILL.md), this STATE file, product/architecture/glossary notes, ADR-001 (Django + React + Postgres), and ADR-002 tenancy (proposed). Next: agree on ADR-002 and module owners.
