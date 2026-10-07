@@ -1,0 +1,27 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# personal agent overrides (never put project context here)
+CLAUDE.local.md
+.claude/settings.local.json
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# node
+node_modules/
+dist/
+
+# obsidian per-user state (shared config in .obsidian/ is committed)
+wms-docs/.obsidian/workspace*.json
+wms-docs/.obsidian/plugins/
+.trash/
+
+# os
+.DS_Store
+Thumbs.db
