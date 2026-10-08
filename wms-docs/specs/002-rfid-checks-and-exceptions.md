@@ -3,7 +3,7 @@ title: "Spec-002 — RFID checks and the exception inbox"
 tags:
   - kind/spec
   - area/rfid
-  - status/draft
+  - status/current
 ---
 
 # Spec-002 — RFID checks and the exception inbox
@@ -13,7 +13,7 @@ does not replace it. These came from a review on 2026-10-09 of an external
 feature list and the diagram `assets/wms-feature-architecture.svg`, compared
 with spec-001 and modules 01–10. Terms are in [[glossary]]; status lives in [[STATE]].
 
-- **Owner:** team · **Status:** draft 2026-10-09 (brainstormed, awaiting review)
+- **Owner:** team · **Status:** approved 2026-10-09
 - **Decisions it builds on:** [[_meta/decisions/002-multi-tenancy]], [[_meta/decisions/005-tag-identity-epc-tid-qr]]
 - **Picture:** `wms-docs/assets/wms-feature-architecture.svg` (grey boxes = these checks)
 
