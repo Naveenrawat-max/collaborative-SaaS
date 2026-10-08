@@ -36,6 +36,7 @@ procedures are in `SKILL.md` (both at the repo root).
 - [[_meta/decisions/004-native-operator-app-trc-rfid]] — native Kotlin operator app on Chainway C72 + trc-rfid (accepted)
 - [[_meta/decisions/005-tag-identity-epc-tid-qr]] — TID = identity, EPC = label ID, QR carries both (accepted)
 - [[_meta/decisions/006-own-warehouse-tenants-first]] — own-warehouse tenants first, `owner` field for 3PL (accepted)
+- [[_meta/decisions/007-parallel-agents-claude-grok]] — Claude Code (lead) + Grok Build (worker) in parallel, cross-review (proposed)
 - [[_meta/decisions/000-template]] — copy this for new ADRs
 
 ## Specs

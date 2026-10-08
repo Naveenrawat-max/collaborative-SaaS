@@ -60,7 +60,9 @@ machine. So:
 **Start of a session**, before writing any code:
 1. `git pull` on your branch, and rebase on `main` if it moved.
 2. Read `wms-docs/STATE.md`, the spec for your task, and any ADRs it links to.
-3. Run the capability check in `SKILL.md`.
+3. Run the capability check in `SKILL.md`, including the **mandatory skills**:
+   **karpathy-guidelines** and **ponytail**. Install them if missing, and apply both
+   actively for the whole session.
 4. State your classification (see section 4).
 
 **End of a session** (or when the human says "handoff"): run the **Handoff
@@ -146,10 +148,20 @@ Each role ends with a HANDOFF block, and the next role builds against its
     with …" lines in commits, PRs, or docs. Commits are authored by the developer.
 11. **Merge conflicts in `STATE.md`**: keep both sides. Each dev edits only their
     own lines, and log entries are append-only.
+12. **Parallel agents** (two agents on one machine, ADR-007, `SKILL.md` C6):
+    - One feature = one branch = one git worktree under `../wms-wt/`. Never edit the
+      main checkout or another agent's worktree.
+    - Only the lead edits shared files (`STATE.md`, `VERSION`, `backend/config/*`,
+      dependency manifests and lockfiles, shared migrations).
+    - No branch is pushed until **the other agent** has reviewed it and run its tests.
+    - Agents never merge into `main`. DevOps merges, and in a parallel run DevOps
+      bumps `VERSION` at merge time.
 
 ## 7. Gates — when a task is done
 
 - [ ] Classification stated; each touched domain handled in its own pass.
+- [ ] karpathy-guidelines and ponytail applied.
+- [ ] In a parallel run: the other agent reviewed the branch (`APPROVE`).
 - [ ] Tests pass (including the cross-tenant test for new endpoints).
 - [ ] Security pass done: no unresolved critical or high findings.
 - [ ] Lint and typecheck clean (once tooling exists).
