@@ -3,6 +3,9 @@
 .env.*
 !.env.example
 
+# parallel-agent mailbox: runtime messages only, context goes in wms-docs/ (ADR-007)
+.agents/
+
 # personal agent overrides (never put project context here)
 CLAUDE.local.md
 .claude/settings.local.json
