@@ -3,13 +3,13 @@ title: "ADR-002 — Multi-tenancy model"
 tags:
   - kind/decision
   - area/tenancy
-  - status/proposed
+  - status/accepted
 ---
 
 # ADR-002 — Multi-tenancy model
 
 - **Date:** 2026-10-08
-- **Status:** **proposed** — needs agreement from all three devs before any model is written
+- **Status:** accepted 2026-10-08 (team can still raise objections on PR #1)
 - **Deciders:** Naveen, Harshit, Joseph
 
 ## Context
@@ -34,12 +34,12 @@ item 1). Tenant data must never leak (AGENTS.md invariant 1). Stack:
    - Pro: maximum isolation.
    - Con: heavy operations. Overkill unless a customer contractually needs it.
 
-## Proposed decision
+## Decision
 **Option 1**: a `tenant_id` foreign key on every tenant-owned model, a single
 scoped base model/manager, and Postgres RLS as defense in depth. Revisit option 3
 only for an enterprise customer who requires a dedicated DB.
 
-## Consequences (if accepted)
+## Consequences
 - Every tenant-owned model inherits one base class. A raw `Model.objects` without
   scoping fails review.
 - Unique constraints include the tenant (e.g. `unique(tenant, sku)`).
