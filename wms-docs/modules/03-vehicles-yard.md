@@ -27,8 +27,9 @@ outbound. It feeds [[modules/04-inbound-receiving]] (unload) and
 - Live board for managers: docks, yard queue, dwell times.
 
 ## RFID adds
-Vehicle or trailer tags read at the gate for automatic gate-in/out; dock-door
-portal reads confirm the vehicle is at the right dock — see [[modules/08-rfid]].
+**Phase 2:** vehicle or trailer tags read at the gate for automatic gate-in/out,
+and dock-door portal reads — see [[modules/08-rfid]]. In the MVP, gate-in/out is
+entered on the web or the handheld.
 
 ## Key entities
 `Vehicle`, `Driver`, `DockAppointment`, `GateEvent`, `YardVisit`, `Dock` (from master data).

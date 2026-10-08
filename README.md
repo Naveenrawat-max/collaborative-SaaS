@@ -1,7 +1,7 @@
 # wms — collaborative SaaS warehouse management system
 
-Multi-tenant WMS (admin / manager / operator, vehicle inbound & outbound, optional RFID)
-built by Naveen, Harshit and Joseph. Stack: Django + React + PostgreSQL.
+Multi-tenant WMS (admin / manager / operator, vehicle inbound & outbound, RFID-first on Chainway C72)
+built by Naveen, Harshit and Joseph. Stack: Django + DRF + PostgreSQL, React back office, native Kotlin operator app.
 
 **Using an AI agent?** It must read [`AGENTS.md`](AGENTS.md) first.
 **Human?** Start at [`wms-docs/STATE.md`](wms-docs/STATE.md), or open `wms-docs/` as an Obsidian vault.

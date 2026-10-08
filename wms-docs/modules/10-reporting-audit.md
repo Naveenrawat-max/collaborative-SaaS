@@ -23,6 +23,8 @@ and [[modules/03-vehicles-yard]].
   yard status, exceptions (discrepancies, short picks).
 - **Reports**: stock on hand, by-location stock, movement history, expiry, receipt
   and shipment history, cycle-count accuracy, dock dwell time, operator productivity.
+- **RFID health:** QR fallback rate (target < 2%), tag conflicts, and unreadable
+  tags flagged — per site and per device.
 - CSV export of every report.
 
 ## Out of scope (for now)

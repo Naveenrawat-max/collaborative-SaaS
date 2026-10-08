@@ -16,11 +16,12 @@ Permissions: [[roles-permissions]].
 - **Status:** draft scope — confirm before writing the spec
 
 ## In scope
-- Tenant lifecycle: create (by platform staff), suspend, reactivate, and tenant settings (timezone, units, **RFID enabled on/off**).
+- Tenant lifecycle: create (by platform staff), suspend, reactivate, and tenant settings (timezone, units). RFID is always on ([[modules/08-rfid]]).
 - Users: invite by email, activate, deactivate, reset password.
 - Roles `admin`, `manager`, and `operator`, assigned per user.
 - **Warehouse access**: a user is limited to specific warehouses (managers and operators).
-- Login for web, and quick login for handheld (e.g. badge scan + PIN — open question).
+- Login: session login on the web. On a registered C72: username + PIN, which
+  returns a short-lived token ([[architecture]]).
 - Audit of security events: login, failed login, role change.
 
 ## Out of scope (for now)
@@ -40,4 +41,3 @@ Every module. Tenant scoping is mandatory everywhere (AGENTS.md invariant 1).
 ## Open questions
 - Can one user belong to several tenants (e.g. a 3PL staff member)?
 - Is there a platform super-admin UI, or is the Django admin enough at first?
-- Handheld login method: username/password, badge + PIN, or device-bound session?

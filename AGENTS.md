@@ -16,12 +16,19 @@ developers (Naveen, Harshit, Joseph), each working with their own AI agent.
 - **User roles**: `admin`, `manager`, `operator`.
 - **Vehicle inbound and outbound**: trucks arriving and leaving the warehouse.
 - **Standard WMS flows**: receiving, putaway, inventory, picking, packing, shipping.
-- **RFID is optional**: every flow must also work with barcode or manual entry.
+- **RFID is mandatory**: every pallet and location is tagged, and operators use
+  Chainway C72 handhelds. A QR code (EPC + TID) is the fallback for exceptions only.
 
 Details live in the docs vault: `wms-docs/product.md`.
 
-**Stack:** Django (backend) + React (frontend) + PostgreSQL —
-see `wms-docs/_meta/decisions/001-stack-django-react.md`.
+**Stack:**
+- Backend: Django + DRF + PostgreSQL
+- Back office (admin, manager): React web app
+- Operators: native Kotlin app on Chainway C72, using
+  [trc-rfid](https://github.com/Naveenrawat-max/trc-rfid)
+
+See ADR-001, ADR-003 and ADR-004 in `wms-docs/_meta/decisions/`. Master design:
+`wms-docs/specs/001-rfid-wms-pilot-design.md`.
 
 ## 2. Where context lives (the core rule)
 
@@ -69,7 +76,8 @@ Before coding, write one line, e.g.
 |---|---|---|
 | `database` | models, migrations, indexes, constraints, tenant scoping | UI, HTTP views |
 | `backend` | API endpoints, business logic, permissions, background jobs | UI; does not redesign the schema |
-| `frontend` | React UI, client state, handheld/operator screens | server logic, DB, secrets |
+| `frontend` | React back office UI, client state | server logic, DB, secrets |
+| `android` | Kotlin operator app, trc-rfid usage, scan sessions | server logic, DB, secrets |
 | `testing` | unit, integration, and e2e tests | production code |
 | `security` | authn/authz, tenant isolation, input validation, secrets — **a gate** | building features |
 | `performance` | profiling, N+1 queries, caching | new features |
@@ -79,7 +87,7 @@ Before coding, write one line, e.g.
 **Multi-domain tasks** run in this order, one role per pass. Announce each pass:
 `>>> ENTER backend ROLE` … `>>> EXIT backend ROLE`
 ```
-database → backend → frontend → testing [GATE] → security [GATE] → performance → docs
+database → backend → frontend / android → testing [GATE] → security [GATE] → performance → docs
 ```
 Each role ends with a HANDOFF block, and the next role builds against its
 **Contract** line only:
@@ -100,9 +108,14 @@ Each role ends with a HANDOFF block, and the next role builds against its
    needs a test proving cross-tenant access fails.
 2. **Roles are enforced on the server.** Hiding a button in the UI is not
    authorization.
-3. **RFID is optional.** Every flow (receive, putaway, move, pick, count, load)
-   must work with no RFID hardware, using barcode or manual entry. RFID only adds
-   automation on top.
+3. **RFID is mandatory; QR only for exceptions.**
+   - Every flow (receive, putaway, move, pick, count, load) identifies pallets
+     and locations by RFID.
+   - The QR label (`E=<epc>;T=<tid>`) is used only when a tag fails, and every
+     QR use is logged with a reason.
+   - Raw tag reads never reach the server. The app sends one business
+     transaction with a `txn_id`.
+   - A tag's identity is its TID (ADR-005).
 4. **Stock changes are atomic and audited.** Every inventory change is one
    database transaction plus an append-only movement record (who, what, when,
    from, to, qty). Stock is never edited in place without a movement record.

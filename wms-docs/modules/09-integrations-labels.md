@@ -21,8 +21,10 @@ into [[modules/04-inbound-receiving]] and orders into [[modules/07-outbound]].
   receipts, shipments, and stock out. Uses per-tenant API keys.
 - **Webhooks**: notify the customer's system on receipt closed, shipment
   dispatched, or stock adjusted.
-- **Labels**: LPN, location, and item labels as PDF first; ZPL for Zebra printers
-  next. Printing from the browser or to a network printer.
+- **Labels:** RFID tags arrive **pre-encoded and pre-printed** with a QR code
+  (`E=<epc>;T=<tid>`, see [[_meta/decisions/005-tag-identity-epc-tid-qr]]). The WMS
+  itself prints only fallback **QR stickers** (PDF, for when a supplier can't print
+  the TID), plus packing lists and delivery notes. RFID printer encoding is Phase 2.
 - **Documents**: packing list, delivery note.
 
 ## Out of scope (for now)

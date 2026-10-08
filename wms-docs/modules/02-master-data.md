@@ -16,11 +16,11 @@ who we deal with. Terms: [[glossary]]. Tenant-scoped per
 - **Status:** draft scope
 
 ## In scope
-- **Warehouse → Zone → Location** hierarchy. Each location has a code (printable as a
-  barcode), a type (rack, floor, dock, staging, quarantine), and optional capacity.
+- **Warehouse → Zone → Location** hierarchy. Each location has a code and an **RFID
+  tag with a QR label**, bound during setup ([[modules/08-rfid]]), a type (rack, floor, dock, staging, quarantine), and optional capacity.
 - **Docks** per warehouse (inbound, outbound, or both).
 - **Items (SKUs)**: description, UoM, conversions (each/case/pallet), barcodes
-  (several per item), whether lot or expiry is tracked, dimensions and weight.
+  (GTIN/SKU codes for lookup), whether lot or expiry is tracked, dimensions and weight.
 - **Partners**: suppliers, customers, carriers.
 - Bulk import from CSV for locations and items.
 - Initially managed through the Django admin. Proper screens come later.

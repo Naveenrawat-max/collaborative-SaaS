@@ -8,33 +8,37 @@ tags:
 
 # Module 05 — Putaway
 
-Moving received pallets from dock/staging into storage locations. Input comes from
-[[modules/04-inbound-receiving]]; every move writes a `Movement` record in
-[[modules/06-inventory]].
+Moving received pallets from dock/staging into storage, **confirmed by reading
+two tags**: the pallet's tag and the location's tag.
+
+- Input comes from [[modules/04-inbound-receiving]].
+- Every move writes a `Movement` record through [[modules/06-inventory]].
 
 - **Owner:** _TBD_ (proposed: dev A) · **Milestone:** M1 — see [[roadmap]]
-- **Status:** draft scope
+- **Status:** draft scope (aligned with spec-001)
 
-## In scope
-- **Putaway tasks** generated when a receipt closes (one per LPN or line).
-- **Location suggestion**, simple to start: a fixed home location per item, else
-  the first empty location in the item's zone.
-- Operator flow: scan the LPN → see the suggested location → go → scan the location
-  to confirm. Override with a reason if the location is full.
-- Task list for operators, and a progress view for managers.
+## In scope (MVP)
+- **Putaway tasks** are created when a receipt closes, one per pallet.
+- **Location suggestion:** the item's fixed home location, otherwise the first
+  empty location in the item's zone.
+- Operator task list, and a progress view for managers.
 
-## Non-RFID path
-Scan the LPN barcode and the location barcode (default).
+## RFID putaway flow (handheld)
+1. Read the pallet tag (**`single`** profile) → the app shows the suggested location.
+2. Drive there and read the **location tag**.
+3. If it matches → confirm. If it's a different location → the operator picks a
+   reason (location full or blocked).
+4. One transaction: `POST /api/v1/putaway-tasks/{id}/confirm` with a `txn_id`.
 
-## RFID adds
-Automatic confirmation when a tagged pallet is read at a location or zone antenna
-— see [[modules/08-rfid]].
+## Exceptions and QR fallback
+- Location tag unreadable → scan the location's QR label, with a reason.
+- Several pallet tags read → keep only the selected pallet; stray reads are ignored.
 
 ## Key entities
-`PutawayTask`, `Movement`, `Location`.
+`PutawayTask`, `Movement`, `Location`, `Tag`.
 
 ## Out of scope (for now)
-Optimised slotting (velocity-based), capacity calculation by volume and weight.
+Slotting optimisation, capacity by volume and weight.
 
 ## Open questions
-- Should suggestions respect capacity from day one, or only "empty / not empty"?
+- Should suggestions respect location capacity from day one, or only "empty / not empty"?

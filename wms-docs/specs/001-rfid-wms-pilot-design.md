@@ -3,7 +3,7 @@ title: "Spec-001 — RFID WMS pilot: goal, scope and design"
 tags:
   - kind/spec
   - area/product
-  - status/draft
+  - status/current
 ---
 
 # Spec-001 — RFID WMS pilot: goal, scope and design
@@ -13,8 +13,9 @@ on 2026-10-08, which researched how real RFID warehouses work (sources at the
 bottom). Supersedes the "RFID optional" assumption in older notes. Status lives in
 [[STATE]]; terms are in [[glossary]].
 
-- **Owner:** team · **Status:** draft — awaiting team review
-- **Decisions to record:** ADR-003 to ADR-006 (section 9), plus the existing
+- **Owner:** team · **Status:** approved 2026-10-08
+- **Decisions:** [[_meta/decisions/003-api-drf]], [[_meta/decisions/004-native-operator-app-trc-rfid]],
+  [[_meta/decisions/005-tag-identity-epc-tid-qr]], [[_meta/decisions/006-own-warehouse-tenants-first]], plus
   [[_meta/decisions/001-stack-django-react]] and [[_meta/decisions/002-multi-tenancy]]
 
 ---

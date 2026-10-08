@@ -3,12 +3,13 @@ title: "Roles & permissions matrix"
 tags:
   - kind/doc
   - area/tenancy
-  - status/draft
+  - status/current
 ---
 
 # Roles & permissions matrix
 
-Draft. **Agree on it before the first spec** ([[STATE]] → Next up). Enforced on the
+Aligned with [[specs/001-rfid-wms-pilot-design]]. Confirm it with the team before the
+first feature spec ([[STATE]]). Enforced on the
 server (AGENTS.md invariant 2). Implemented in [[modules/01-tenancy-users]].
 
 `✅` allowed · `👁` view only · `⚠` needs manager approval above a threshold · `—` not allowed.
@@ -17,10 +18,17 @@ Managers and operators are limited to the warehouses they are assigned to.
 | Capability | admin | manager | operator |
 |---|---|---|---|
 | Manage users, roles, warehouse access | ✅ | — | — |
-| Tenant settings (RFID on/off, timezone, units) | ✅ | — | — |
+| Tenant settings (timezone, units) | ✅ | — | — |
 | Master data: warehouses, zones, locations, docks | ✅ | 👁 | — |
+| Bind location tags (warehouse setup) | ✅ | ✅ | — |
 | Master data: items, partners | ✅ | ✅ | 👁 |
-| RFID hardware registry | ✅ | 👁 | — |
+| Register C72 devices to a warehouse | ✅ | 👁 | — |
+| Power profiles (dBm per task) | ✅ | ✅ | — |
+| Import supplier tag lists (EPC/TID CSV) | ✅ | ✅ | — |
+| Bind tags to pallets (receiving, packing) | ✅ | ✅ | ✅ |
+| Resolve tag conflicts (duplicate EPC), retire tags | ✅ | ✅ | — |
+| Use the QR fallback (with a reason) | ✅ | ✅ | ✅ |
+| Find-a-tag | ✅ | ✅ | ✅ |
 | Dock appointments | ✅ | ✅ | 👁 |
 | Gate-in / gate-out | ✅ | ✅ | ✅ |
 | Create or import ASNs | ✅ | ✅ | — |
@@ -31,7 +39,7 @@ Managers and operators are limited to the warehouses they are assigned to.
 | Create cycle counts / approve variances | ✅ | ✅ | — |
 | Perform counts | ✅ | ✅ | ✅ |
 | Holds (block/unblock stock) | ✅ | ✅ | — |
-| Create or import orders, release waves | ✅ | ✅ | — |
+| Create or import orders | ✅ | ✅ | — |
 | Pick, pack, load | ✅ | ✅ | ✅ |
 | Dispatch shipment | ✅ | ✅ | — |
 | Reports and dashboards | ✅ | ✅ (own warehouses) | — |

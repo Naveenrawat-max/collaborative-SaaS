@@ -14,7 +14,7 @@ tags:
 
 ## Context
 Three developers are building a multi-tenant WMS with roles, transactional
-inventory, vehicle flows, and optional RFID. We need one stack that every dev and
+inventory, vehicle flows, and RFID (made mandatory by [[specs/001-rfid-wms-pilot-design]]). We need one stack that every dev and
 every AI agent can work in. Requirements: [[product]].
 
 ## Options considered

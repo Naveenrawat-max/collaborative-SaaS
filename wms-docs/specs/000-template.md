@@ -24,8 +24,12 @@ Which of admin / manager / operator can do what in this feature.
 ## Flow
 Numbered steps as the user experiences them (handheld or web).
 
-## Non-RFID path
-How every step works with barcode or manual entry (required — AGENTS.md invariant 3).
+## RFID flow, exceptions and QR fallback
+Required (AGENTS.md invariant 3). Describe:
+- the power profile
+- live ✅/⚠/❌ matching
+- the confirm transaction (`txn_id`)
+- how each exception falls back to the QR label, with a logged reason
 
 ## Data
 Models and fields added or changed (tenant-scoped). Movement records written.

@@ -8,40 +8,47 @@ tags:
 
 # Module 07 — Outbound
 
-From customer order to goods on a departing truck. It allocates and picks from
-[[modules/06-inventory]], and loads vehicles managed by
-[[modules/03-vehicles-yard]].
+From customer order to goods on a departing truck, with **every pick and every
+loaded pallet confirmed by RFID**.
+
+- Allocates and picks from [[modules/06-inventory]].
+- Loads vehicles managed by [[modules/03-vehicles-yard]].
+- Tag rules: [[modules/08-rfid]].
 
 - **Owner:** _TBD_ (proposed: dev C) · **Milestone:** M3 — see [[roadmap]]
-- **Status:** draft scope
+- **Status:** draft scope (aligned with spec-001)
 
-## In scope
-- **Orders**: create manually, import from CSV, or receive through the API
-  ([[modules/09-integrations-labels]]). Lines: item, qty, requested lot (optional).
+## In scope (MVP)
+- **Orders:** created manually or imported from CSV
+  ([[modules/09-integrations-labels]]).
   Statuses: `new → allocated → picking → packed → loaded → shipped`.
-- **Allocation**: reserve available stock (FEFO for lot-tracked items) and flag shortages.
-- **Waves**: a manager groups orders and releases them as pick tasks.
-- **Picking** on a handheld: go to the location → scan the location → scan the
-  item/LPN → confirm qty. Handle short picks with a reason.
-- **Packing**: put picked goods into shipping units (cartons or pallets with an
-  LPN), and print a packing list and label.
-- **Shipment and loading**: link packed units to a shipment and a vehicle/dock
-  appointment, and scan each unit onto the truck.
-- **Dispatch**: close the shipment, generate a delivery note, then gate-out.
+- **Allocation:** reserves available stock (FEFO for lot-tracked items) and flags shortages.
+- **Picking:** order by order.
+  1. Go to the location.
+  2. Read the location tag + pallet tag (**`pick`** profile).
+  3. The app checks the pallet is the allocated one.
+  4. Confirm the qty.
+- **Packing:** build an outbound pallet and **bind a new tag** to it, then print a
+  packing list.
+- **Load check:** at the truck, read every pallet (`single` profile, one pallet at
+  a time, or a sweep). The app compares the reads with the shipment: ✅ all loaded ·
+  ❌ missing · ⚠ wrong pallet.
+- **Dispatch:** close the shipment, generate a delivery note, then gate-out.
 
-## Non-RFID path
-Scan the location, item, and LPN barcodes (default).
+## Exceptions and QR fallback
+- Wrong pallet picked → blocked, with the allocated pallet's location shown.
+- Unreadable tag at load → QR scan with a reason.
+- Short pick → reason code; the order stays partly allocated.
 
-## RFID adds
-Load verification: a dock portal reads all tagged units going onto the truck and
-flags missing or wrong ones — see [[modules/08-rfid]].
+## Phase 2
+- Dock portal: automatic load verification as pallets pass the door.
+- Wave and batch picking.
 
 ## Key entities
-`Order`, `OrderLine`, `Allocation`, `Wave`, `PickTask`, `PackUnit`, `Shipment`, `Load`.
+`Order`, `OrderLine`, `Allocation`, `PickTask`, `PackUnit`, `Shipment`, `Load`, `Tag`, `Scan`.
 
-## Out of scope (for now)
-Carrier rate shopping, route planning (TMS), and billing.
+## Out of scope
+Carrier rate shopping, route planning (TMS), billing.
 
 ## Open questions
-- Pick strategies needed at the start: discrete order picking only, or batch/zone too?
-- Partial shipments and backorders — allowed?
+- Partial shipments and backorders allowed in the pilot?

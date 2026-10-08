@@ -114,7 +114,7 @@ shape, a tenancy approach, or an API convention.
 ### C4. Write a spec (before coding a feature)
 1. Copy `wms-docs/specs/000-template.md` to `NNN-module-feature.md`.
 2. Fill in the goal, roles, flow, data, API contract, acceptance criteria, and the
-   non-RFID path.
+   RFID flow with its exceptions and QR fallback.
 3. Link it from `00 Index.md` → Specs, and from `STATE.md` → In progress.
 4. Get a teammate's 👍 on the spec PR, or in the feature PR if it's small.
 

@@ -37,7 +37,15 @@ term here **before** using it in code. Scope context: [[product]].
 | Pick | Taking goods from a location for an order | `Pick` |
 | Pack | Putting picked goods into shipping units | `Pack` |
 | Load / dispatch | Putting packed units on a vehicle and sending it | `Load` |
-| Scan | Any identification event: barcode, RFID read, or manual entry | `Scan` (field `source`) |
-| EPC | Electronic Product Code — the ID stored on an RFID tag | `epc` |
-| Reader / antenna | RFID hardware; a reader has one or more antennas | `RfidReader`, `RfidAntenna` |
-| Tag binding | Linking an EPC to an item, LPN, or location | `TagBinding` |
+| Scan | A confirmed identification recorded by the server: RFID or QR fallback | `Scan` (field `source`: `rfid` or `qr`) |
+| EPC | Electronic Product Code — the label ID written in a tag's EPC memory. It can be duplicated. | `epc` |
+| TID | Tag Identifier — the chip's factory serial. Unique and can't be rewritten, so it is the tag's identity. | `tid` |
+| Tag registry | Every known tag (TID + EPC) and what it is bound to | `Tag` |
+| Binding | Linking a tag to a pallet, location or vehicle | `Tag.bound_type`, `Tag.bound_id` |
+| Tag conflict | One EPC seen with two different TIDs. Blocks use until resolved. | `Tag.status = conflict` |
+| Pre-encoded roll | Tags bought with unique EPCs already written and a QR (EPC+TID) printed | — |
+| QR fallback | Scanning a label's QR (`E=<epc>;T=<tid>`) when the tag won't read. Always logged with a reason. | `Scan.source = qr` |
+| Power profile | Reader output power per task (`single`, `pick`, `sweep`) | `PowerProfile` |
+| Find-a-tag | Hot/cold search for one tag by signal strength (trc-rfid `TagFinder`) | — |
+| Device | A registered Chainway C72 handheld | `Device` |
+| Reader / antenna | Fixed RFID hardware for dock portals (Phase 2) | `RfidReader`, `RfidAntenna` |

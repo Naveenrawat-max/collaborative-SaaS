@@ -10,28 +10,37 @@ tags:
 
 The source of truth for what stock is where. Every other module changes stock
 **only** through this module's movement service (AGENTS.md invariant 4).
-Terms: [[glossary]].
+Terms are in [[glossary]]; tags are in [[modules/08-rfid]].
 
 - **Owner:** _TBD_ (proposed: dev B) · **Milestone:** M1 (core), M2 (operations) — see [[roadmap]]
-- **Status:** draft scope
+- **Status:** draft scope (aligned with spec-001)
 
-## In scope
-- **Stock** per tenant × location × item × lot (× LPN), with statuses: `available`,
-  `quarantine`, `damaged`, `allocated`.
-- **Movement service**: one function every module calls. It is atomic
-  (`transaction.atomic` + row lock), never lets stock go negative, and always
-  writes an append-only `Movement` record.
-- **Internal moves**: an operator moves stock or an LPN from location A to B.
-- **Adjustments** with reason codes. Above a threshold, a manager must approve.
-- **Cycle counts**: a manager creates a count (by zone or location), the operator
-  counts blind, variances go to manager approval, then an adjustment is posted.
-- **Lot and expiry tracking** where the item requires it; FEFO for picking.
-- **Holds**: block stock (by lot, location, or item) from being picked.
-- Stock enquiry: by item, location, LPN, or lot.
+## In scope (MVP)
+- **Stock** per tenant × owner × location × item × lot × pallet.
+  - Statuses: `available`, `quarantine`, `damaged`, `allocated`.
+  - `owner` per [[_meta/decisions/006-own-warehouse-tenants-first]].
+- **Movement service:** one function every module calls.
+  - Atomic: `transaction.atomic` + row lock.
+  - Never lets stock go negative.
+  - Always writes an append-only `Movement` record.
+  - Applies a `txn_id` only once.
+- **RFID move:** read the pallet tag, then the destination location tag, then confirm.
+- **Adjustments** with reason codes. Above a threshold, a manager approves.
+- **RFID cycle count:**
+  1. A manager creates a count (by zone or location).
+  2. The operator sweeps the zone (**`sweep`** profile, 30 dBm).
+  3. The app compares the tags read with the expected pallets: ✅ found ·
+     ❌ missing · ⚠ extra or misplaced.
+  4. Variances go to the manager for approval, then an adjustment is posted.
+- **Find-a-tag:** look for a missing pallet with `TagFinder` (hot/cold).
+- **Lot and expiry** tracking where the item requires it; FEFO for allocation.
+- **Holds:** block stock (by lot, location or item) from being picked.
+- **Stock enquiry:** by item, location, pallet, lot, or tag.
 
-## RFID adds
-Fast cycle counts by bulk read; continuous location tracking with fixed readers
-— see [[modules/08-rfid]].
+## Exceptions and QR fallback
+- Unreadable pallet tag during a count → find it, then QR scan with a reason,
+  and the tag is flagged for replacement.
+- Duplicate EPC → resolved by TID or QR ([[_meta/decisions/005-tag-identity-epc-tid-qr]]).
 
 ## Key entities
 `Stock`, `Movement`, `Adjustment`, `CycleCount`, `CycleCountLine`, `Hold`, `Lot`, `LPN`.
@@ -41,5 +50,5 @@ Fast cycle counts by bulk read; continuous location tracking with fixed readers
 [[modules/10-reporting-audit]].
 
 ## Open questions
-- Serial-number tracking (per unit) — needed by any target customer?
-- Is stock valuation needed, or quantities only? (Proposed: quantities only.)
+- Serial-number tracking per unit → *Later*, unless the pilot customer needs it.
+- Stock valuation → not building (quantities only).

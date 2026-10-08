@@ -11,9 +11,11 @@ tags:
 **Read this first, every session. Update it at every handoff** (procedure C2 in
 `SKILL.md`). Each dev edits only their own lines, and the Log is append-only.
 
-- **Version:** 0.1.2 (see `VERSION`)
+- **Version:** 0.1.3 (see `VERSION`)
 - **Phase:** 0 — project setup. No application code yet.
-- **Stack:** Django + React + PostgreSQL — [[_meta/decisions/001-stack-django-react]]
+- **Master design:** [[specs/001-rfid-wms-pilot-design]] (approved 2026-10-08). RFID is mandatory, with a QR (EPC+TID) fallback.
+- **Stack:** Django + DRF + PostgreSQL · React back office · native Kotlin app on Chainway C72 with trc-rfid.
+  Decisions: [[_meta/decisions/001-stack-django-react]], [[_meta/decisions/003-api-drf]], [[_meta/decisions/004-native-operator-app-trc-rfid]]
 
 ## Team and module ownership
 
@@ -35,26 +37,25 @@ _Nothing yet._ Format: `- <dev> · <branch> · <spec link> — status, exact nex
 
 ## Next up (in order)
 
-0. **Review [[specs/001-rfid-wms-pilot-design]]** (pilot goal, RFID mandatory, QR fallback). After approval: update notes per its section 10 and write ADR-003 to ADR-006.
 1. **Agree on ADR-002 multi-tenancy** → [[_meta/decisions/002-multi-tenancy]]. This blocks all models.
 2. Assign module ownership (table above).
-3. Review the draft scope: each module's open questions in `modules/`, the [[roles-permissions]] matrix, and the [[non-functional]] targets (especially **handheld offline: yes/no**).
-4. Confirm the API style (Django REST Framework?) and frontend tooling (Vite?) → write ADR-003.
-5. Scaffold the Django project, React app, Postgres in docker-compose, and CI.
-6. First spec: tenancy + users + roles.
+3. Write the **implementation plan for M0** (scaffold + tenancy + master data + tag registry), following [[roadmap]].
+4. Pilot prep (non-code): choose the tag supplier (must print the TID in the QR, risk R3), confirm the Chainway SDK licence (R2), verify `readOnce()`/`readMemory()` on a real C72 (R1).
+5. Scaffold `backend/`, `web/`, `android/`, Postgres in docker-compose, and CI.
 
 ## Open decisions
 
 | Question | Options | Owner | Note |
 |---|---|---|---|
 | Tenancy model | shared tables + `tenant_id` + RLS / schema-per-tenant | all | [[_meta/decisions/002-multi-tenancy]] (proposed) |
-| API layer | Django REST Framework / Django Ninja | backend | — |
-| Frontend tooling | Vite + React / other | frontend | — |
+| Web tooling | Vite + React / other | frontend | — |
 | Background jobs | Celery / django-q2 / Dramatiq | backend | needed for imports, reports |
-| RFID hardware and protocol | which readers; LLRP / vendor SDK / HTTP push | inventory owner | collect from first customer |
-| Handheld devices | browser PWA on Android scanners / native | frontend | — |
+| Tag supplier | must pre-encode and print QR with EPC + TID | RFID owner | spec risk R3 |
+| Dock portal reader model (Phase 2) | LLRP fixed reader brand | RFID owner | [[modules/08-rfid]] |
 | Hosting | — | devops | — |
-| Code map in vault | `vaultify sync` layout once Django code exists | docs | see [[architecture]] |
+| Code map in vault | `vaultify sync` layout once code exists | docs | see [[architecture]] |
+
+Decided on 2026-10-08: API = DRF ([[_meta/decisions/003-api-drf]]) · handheld = native Kotlin on C72 ([[_meta/decisions/004-native-operator-app-trc-rfid]]) · tag identity = TID + EPC with QR ([[_meta/decisions/005-tag-identity-epc-tid-qr]]) · tenants = own-warehouse first ([[_meta/decisions/006-own-warehouse-tenants-first]]).
 
 ## Blockers
 
@@ -66,12 +67,14 @@ _None._
 
 ## Done
 
+- 2026-10-08 — Spec-001 approved. Notes aligned (RFID mandatory, QR fallback), ADR-003 to ADR-006 written.
 - 2026-10-08 — Spec-001 drafted: RFID-mandatory pilot goal, phased scope, architecture (native C72 app + trc-rfid), tag identity (EPC+TID, QR fallback).
 - 2026-10-08 — Draft scope: 10 module notes, roles-permissions matrix, roadmap M0–M5, non-functional requirements.
 - 2026-10-08 — Project context scaffold: AGENTS.md, SKILL.md, the `wms-docs` vault, ADR-001, ADR-002 (proposed).
 
 ## Log (newest first)
 
+- 2026-10-08 · setup · `chore/project-context` — Spec-001 approved. Applied its section 10: AGENTS.md invariant 3 is now "RFID mandatory, QR only for exceptions", with a new `android` role. Rewrote product, architecture, roadmap (RFID from M1) and modules 04–08. Updated roles, non-functional, glossary, the spec template and the PR template. Added ADR-003 to ADR-006. Next: accept ADR-002, assign owners, write the M0 implementation plan.
 - 2026-10-08 · setup · `chore/project-context` — Brainstormed with web research: RFID is now **mandatory**, with QR (EPC+TID) fallback; Chainway C72 + trc-rfid; native Kotlin operator app; own-warehouse tenants first. Wrote [[specs/001-rfid-wms-pilot-design]]. Older notes still say "RFID optional" until the spec is approved and section 10 is applied.
 - 2026-10-08 · setup · `chore/project-context` — Added draft scope for every module (`modules/01–10`), [[roles-permissions]], [[roadmap]], and [[non-functional]]. Each module lists its open questions. Next: team reviews the scope and ADR-002 on PR #1.
 - 2026-10-08 · setup · `chore/project-context` — Set up the shared-context system: rules for all agents (AGENTS.md), procedures (SKILL.md), this STATE file, product/architecture/glossary notes, ADR-001 (Django + React + Postgres), and ADR-002 tenancy (proposed). Next: agree on ADR-002 and module owners.

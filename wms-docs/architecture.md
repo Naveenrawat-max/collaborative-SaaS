@@ -3,59 +3,74 @@ title: "Architecture"
 tags:
   - kind/doc
   - area/architecture
-  - status/draft
+  - status/current
 ---
 
 # Architecture
 
-The stack is fixed by [[_meta/decisions/001-stack-django-react]]. Tenant isolation
-follows [[_meta/decisions/002-multi-tenancy]]. Anything marked _TBD_ is listed in
-[[STATE]] → Open decisions.
+This note summarises section 4 of [[specs/001-rfid-wms-pilot-design]].
+
+Decisions it follows:
+- [[_meta/decisions/001-stack-django-react]]
+- [[_meta/decisions/002-multi-tenancy]]
+- [[_meta/decisions/003-api-drf]]
+- [[_meta/decisions/004-native-operator-app-trc-rfid]]
+- [[_meta/decisions/005-tag-identity-epc-tid-qr]]
 
 ## Components
 
 ```
- Handheld (operator)      Web (admin / manager)
-        \                      /
-         React app (TBD tooling)
-                  |
-           HTTPS JSON API
-                  |
-        Django backend ── background worker (TBD)
-                  |
-             PostgreSQL
-                  ^
-     RFID gateway (optional, separate process)
-     reader → gateway → API (as scan events)
+ Operator: Chainway C72                      Back office: desktop browser
+ ┌───────────────────────────────┐           ┌───────────────────────┐
+ │ Native Kotlin app (Compose)   │           │ React web app         │
+ │  screens → domain logic       │           │ admin + manager       │
+ │  trc-rfid: RfidScanner,       │           └──────────┬────────────┘
+ │            TagFinder          │                      │
+ │  QR via Keyboard Emulator     │                      │
+ └──────────────┬────────────────┘                      │
+                └────────── HTTPS JSON /api/v1 ─────────┘
+                       Django + DRF, single movement service
+                                    │
+                                PostgreSQL
+                                    ▲
+        Phase 2: edge gateway (Python + sllurp, on-site mini-PC)
+                 LLRP dock readers → filter → events → API
 ```
 
-- **Django backend** — all business logic, permissions, and tenant scoping. It is
-  the single source of truth.
-- **React app** — one app with role-based screens. Operator screens must work on
-  handheld scanners (large touch targets, keyboard-wedge barcode input).
-- **PostgreSQL** — one database. Stock changes are transactional and append a
-  movement record (AGENTS.md invariant 4).
-- **RFID gateway** — optional, because readers need an always-on listener. It turns
-  tag reads into the **same scan events** a barcode scan produces, so business logic
-  never knows whether a scan came from RFID, a barcode, or manual entry.
+| Component | Path | Notes |
+|---|---|---|
+| Django API | `backend/` | DRF under `/api/v1`, tenant-scoped base viewset, OpenAPI via drf-spectacular |
+| React back office | `web/` | admin + manager screens (tooling still open, see [[STATE]]) |
+| Operator app | `android/` | Kotlin + Compose, `trc-rfid:rfid-find:1.0.0`, QR via Keyboard Emulator (QR-only) |
+| Edge gateway | `gateway/` | **Phase 2** — Python + `sllurp`, buffers events when the link to the API is down |
+| Docs vault | `wms-docs/` | this vault |
 
-## Scan-source abstraction (why RFID stays optional)
+Create each folder when its first code lands, not before.
 
-Every operator flow consumes a generic *scan* (`identifier`, `source` =
-`barcode|rfid|manual`, `device`, `timestamp`). RFID adds bulk reads and automation
-on top. A tenant with RFID turned off loses no functionality.
+## Rule: raw reads never reach the server
 
-## Repository layout (target — create as needed, not up front)
+1. `RfidScanner.onTag` delivers raw reads, many per second per tag.
+2. The app de-duplicates them by EPC and attaches the TID once a read delivers it.
+3. The app matches tags live against the expected list: ✅ matched / ⚠ unexpected / ❌ missing.
+4. The operator confirms. The app sends **one business transaction** with a
+   `txn_id`, e.g. `POST /api/v1/receipts/{id}/confirm`.
+5. The server does it all in one DB transaction:
+   1. resolves the tags (same tenant)
+   2. binds the pallets
+   3. calls the movement service
+   4. writes `Scan` rows
+   5. returns a result per tag
+6. A repeated `txn_id` is applied only once, so retry after a network drop is safe.
 
-```
-AGENTS.md  SKILL.md  VERSION       rules, procedures, version
-backend/                           Django project
-frontend/                          React app
-tools/vaultify.py                  docs vault tooling
-wms-docs/                          this vault
-```
+The Phase 2 gateway follows the same rule: filter at the dock and send events.
+
+## Auth
+- **Back office:** session login.
+- **Handheld:**
+  1. An admin registers the device to one warehouse.
+  2. The operator logs in with username + PIN.
+  3. The app receives a short-lived token.
 
 ## Code map
-
-Once code exists, decide how `tools/vaultify.py sync` generates code notes into
-this vault (open item in [[STATE]]).
+Once code exists, decide how `tools/vaultify.py sync` writes code notes into this
+vault (open item in [[STATE]]).

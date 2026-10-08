@@ -22,7 +22,7 @@ procedures are in `SKILL.md` (both at the repo root).
 - [[roadmap]] — milestones M0–M5 and who builds what
 - [[roles-permissions]] — admin / manager / operator capability matrix
 - [[non-functional]] — security, integrity, performance, handheld UX targets
-- Modules (draft): [[modules/01-tenancy-users]] · [[modules/02-master-data]] ·
+- Modules: [[modules/01-tenancy-users]] · [[modules/02-master-data]] ·
   [[modules/03-vehicles-yard]] · [[modules/04-inbound-receiving]] ·
   [[modules/05-putaway]] · [[modules/06-inventory]] · [[modules/07-outbound]] ·
   [[modules/08-rfid]] · [[modules/09-integrations-labels]] ·
@@ -32,11 +32,15 @@ procedures are in `SKILL.md` (both at the repo root).
 
 - [[_meta/decisions/001-stack-django-react]] — Django + React + PostgreSQL (accepted)
 - [[_meta/decisions/002-multi-tenancy]] — shared tables + `tenant_id` + RLS (**proposed**)
+- [[_meta/decisions/003-api-drf]] — API layer: Django REST Framework (accepted)
+- [[_meta/decisions/004-native-operator-app-trc-rfid]] — native Kotlin operator app on Chainway C72 + trc-rfid (accepted)
+- [[_meta/decisions/005-tag-identity-epc-tid-qr]] — TID = identity, EPC = label ID, QR carries both (accepted)
+- [[_meta/decisions/006-own-warehouse-tenants-first]] — own-warehouse tenants first, `owner` field for 3PL (accepted)
 - [[_meta/decisions/000-template]] — copy this for new ADRs
 
 ## Specs
 
-- [[specs/001-rfid-wms-pilot-design]] — **pilot goal, scope by phase, RFID design** (draft, under review)
+- [[specs/001-rfid-wms-pilot-design]] — **pilot goal, scope by phase, RFID design** (approved — the master design)
 - [[specs/000-template]] — copy this before building a feature
 
 ## Meta

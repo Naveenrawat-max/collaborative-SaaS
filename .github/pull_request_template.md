@@ -6,5 +6,5 @@
 - [ ] ADR added for any decision (`wms-docs/_meta/decisions/`)
 - [ ] `VERSION` bumped
 - [ ] Tests pass, incl. cross-tenant test for new endpoints
-- [ ] Works without RFID (barcode/manual path)
+- [ ] RFID flow + exceptions + QR fallback (with logged reason) covered
 - [ ] No secrets, no `.env` committed
