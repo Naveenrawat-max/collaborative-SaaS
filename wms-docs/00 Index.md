@@ -31,7 +31,7 @@ procedures are in `SKILL.md` (both at the repo root).
 ## Decisions
 
 - [[_meta/decisions/001-stack-django-react]] — Django + React + PostgreSQL (accepted)
-- [[_meta/decisions/002-multi-tenancy]] — shared tables + `tenant_id` + RLS (**proposed**)
+- [[_meta/decisions/002-multi-tenancy]] — shared tables + `tenant_id` + RLS (accepted)
 - [[_meta/decisions/003-api-drf]] — API layer: Django REST Framework (accepted)
 - [[_meta/decisions/004-native-operator-app-trc-rfid]] — native Kotlin operator app on Chainway C72 + trc-rfid (accepted)
 - [[_meta/decisions/005-tag-identity-epc-tid-qr]] — TID = identity, EPC = label ID, QR carries both (accepted)
@@ -42,6 +42,10 @@ procedures are in `SKILL.md` (both at the repo root).
 
 - [[specs/001-rfid-wms-pilot-design]] — **pilot goal, scope by phase, RFID design** (approved — the master design)
 - [[specs/000-template]] — copy this before building a feature
+
+## Plans
+
+- [[plans/2026-10-08-m0-backend]] — M0 backend foundation: tenancy + RLS, master data, tag registry, C72 devices (draft)
 
 ## Meta
 
