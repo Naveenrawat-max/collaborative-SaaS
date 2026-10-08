@@ -13,7 +13,7 @@ data comes from the `Movement` and event records in [[modules/06-inventory]]
 and [[modules/03-vehicles-yard]].
 
 - **Owner:** _TBD_ (shared) · **Milestone:** M5 (dashboards), audit from M0 — see [[roadmap]]
-- **Status:** draft scope
+- **Status:** draft scope (aligned with spec-002)
 
 ## In scope
 - **Audit log** (from M0): every create, update, or delete on business records and
@@ -25,6 +25,12 @@ and [[modules/03-vehicles-yard]].
   and shipment history, cycle-count accuracy, dock dwell time, operator productivity.
 - **RFID health:** QR fallback rate (target < 2%), tag conflicts, and unreadable
   tags flagged — per site and per device.
+- **Exception inbox** (cases from M0, web screen in M1, rules in [[specs/002-rfid-checks-and-exceptions]] §8): one list
+  per warehouse of open `ExceptionCase` rows (`tag_conflict`, `intake_failed`,
+  `wrong_location`, `hold_escape`, `pack_mismatch`) plus computed **stuck** pallets
+  (on staging or dock longer than `Warehouse.stuck_after_hours`). Resolve by "move to
+  seen location" or "dismiss with note". Admins get a badge for `intake_failed` and
+  `tag_conflict`.
 - CSV export of every report.
 
 ## Out of scope (for now)

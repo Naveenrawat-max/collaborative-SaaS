@@ -41,6 +41,7 @@ procedures are in `SKILL.md` (both at the repo root).
 ## Specs
 
 - [[specs/001-rfid-wms-pilot-design]] — **pilot goal, scope by phase, RFID design** (approved — the master design)
+- [[specs/002-rfid-checks-and-exceptions]] — tag intake check, last-seen, wrong-location, hold escape, pack confirm, exception inbox (draft)
 - [[specs/000-template]] — copy this before building a feature
 
 ## Plans

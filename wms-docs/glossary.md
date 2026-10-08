@@ -48,4 +48,14 @@ term here **before** using it in code. Scope context: [[product]].
 | Power profile | Reader output power per task (`single`, `pick`, `sweep`) | `PowerProfile` |
 | Find-a-tag | Hot/cold search for one tag by signal strength (trc-rfid `TagFinder`) | — |
 | Device | A registered Chainway C72 handheld | `Device` |
+| Tag batch | One supplier roll of tags, checked by a bench sample before use | `TagBatch` |
+| Tag intake | The bench check of a roll: chip read compared with the printed QR | `TagBatch.status` (`imported`, `accepted`, `quarantined`) |
+| Verified tag | A tag whose chip was proven to match its QR or its registered pair | `Tag.verified_at` |
+| Last-seen | The location and time of the last confirmed transaction that read a tag | `Tag.last_seen_location`, `Tag.last_seen_at` |
+| Exception | A problem a manager must look at, raised by the server; one open case per problem | `ExceptionCase` (field `kind`) |
+| Wrong location | A pallet read at one location while its stock is booked at another | `ExceptionCase.kind = wrong_location` |
+| Hold escape | Held or quarantined stock showing up in a pick, load or non-quarantine move | `ExceptionCase.kind = hold_escape` |
+| Stuck pallet | Stock on a staging or dock location longer than the warehouse threshold | `Warehouse.stuck_after_hours` (computed, not stored) |
+| Retag | Replacing a damaged tag: retire the old one and bind the new one in one step | `POST /tags/retag` |
+| Pack confirm | Reading the new tag on a built pallet and checking it against its shipment | `PackUnit` status `pack_confirmed` |
 | Reader / antenna | Fixed RFID hardware for dock portals (Phase 2) | `RfidReader`, `RfidAntenna` |

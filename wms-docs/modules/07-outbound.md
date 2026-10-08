@@ -16,7 +16,7 @@ loaded pallet confirmed by RFID**.
 - Tag rules: [[modules/08-rfid]].
 
 - **Owner:** _TBD_ (proposed: dev C) · **Milestone:** M3 — see [[roadmap]]
-- **Status:** draft scope (aligned with spec-001)
+- **Status:** draft scope (aligned with spec-001 and spec-002)
 
 ## In scope (MVP)
 - **Orders:** created manually or imported from CSV
@@ -28,17 +28,23 @@ loaded pallet confirmed by RFID**.
   2. Read the location tag + pallet tag (**`pick`** profile).
   3. The app checks the pallet is the allocated one.
   4. Confirm the qty.
-- **Packing:** build an outbound pallet and **bind a new tag** to it, then print a
-  packing list.
+  5. A pallet booked at another location still picks, and opens a `wrong_location`
+     case. A pallet on hold is refused (`on_hold`) and opens `hold_escape` ([[specs/002-rfid-checks-and-exceptions]] §6).
+- **Packing:** build an outbound pallet, stick a new tag on it, then **pack confirm**:
+  read that tag on the pallet (`single` profile), never from the roll. The server binds
+  it and checks it belongs to this shipment; the pack unit becomes `pack_confirmed`.
+  Then print the packing list ([[specs/002-rfid-checks-and-exceptions]] §7).
 - **Load check:** at the truck, read every pallet (`single` profile, one pallet at
   a time, or a sweep). The app compares the reads with the shipment: ✅ all loaded ·
-  ❌ missing · ⚠ wrong pallet.
+  ❌ missing · ⚠ wrong pallet. A pallet that was never pack-confirmed is refused
+  (`not_pack_confirmed`).
 - **Dispatch:** close the shipment, generate a delivery note, then gate-out.
 
 ## Exceptions and QR fallback
 - Wrong pallet picked → blocked, with the allocated pallet's location shown.
 - Unreadable tag at load → QR scan with a reason.
 - Short pick → reason code; the order stays partly allocated.
+- Pack read of a tag bound to another shipment → refused, `pack_mismatch` case.
 
 ## Phase 2
 - Dock portal: automatic load verification as pallets pass the door.
