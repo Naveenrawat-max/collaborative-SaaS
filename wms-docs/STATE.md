@@ -11,7 +11,7 @@ tags:
 **Read this first, every session. Update it at every handoff** (procedure C2 in
 `SKILL.md`). Each dev edits only their own lines, and the Log is append-only.
 
-- **Version:** 0.1.4 (see `VERSION`)
+- **Version:** 0.1.5 (see `VERSION`)
 - **Phase:** 0 — project setup. No application code yet.
 - **Master design:** [[specs/001-rfid-wms-pilot-design]] (approved 2026-10-08). RFID is mandatory, with a QR (EPC+TID) fallback.
 - **Stack:** Django + DRF + PostgreSQL · React back office · native Kotlin app on Chainway C72 with trc-rfid.
@@ -37,10 +37,11 @@ _Nothing yet._ Format: `- <dev> · <branch> · <spec link> — status, exact nex
 
 ## Next up (in order)
 
-1. Review and execute [[plans/2026-10-08-m0-backend]] on branch `feat/m0-backend` (after PR #1 merges).
-2. Assign module ownership (table above).
-3. Write the M0 web plan and the M0 Android plan, against `wms-docs/api-contract.md` (published by the backend plan's Task 11).
-4. Pilot prep (non-code): choose the tag supplier (must print the TID in the QR, risk R3), confirm the Chainway SDK licence (R2), verify `readOnce()`/`readMemory()` on a real C72 (R1).
+1. Review [[specs/002-rfid-checks-and-exceptions]]. After approval, update modules 04/06/07/08/10, glossary, roadmap and add its M0 rows to the backend plan (spec-002 §13).
+2. Review and execute [[plans/2026-10-08-m0-backend]] on branch `feat/m0-backend` (after PR #1 merges).
+3. Assign module ownership (table above).
+4. Write the M0 web plan and the M0 Android plan, against `wms-docs/api-contract.md` (published by the backend plan's Task 11).
+5. Pilot prep (non-code): choose the tag supplier (must print the TID in the QR, risk R3), confirm the Chainway SDK licence (R2), verify `readOnce()`/`readMemory()` on a real C72 (R1).
 
 ## Open decisions
 
@@ -73,6 +74,7 @@ _None._
 
 ## Log (newest first)
 
+- 2026-10-09 · setup · `chore/project-context` — Brainstormed an external feature review (Grok + `assets/wms-feature-architecture.svg`). Wrote [[specs/002-rfid-checks-and-exceptions]] (draft): sampled tag intake per roll, last-seen on every confirm, wrong-location and hold-escape cases, stuck pallets, retag, pack confirm, exception inbox. Returnable pallets, forklift readers, carton tags stay out. Next: team reviews spec-002.
 - 2026-10-08 · setup · `chore/project-context` — Accepted ADR-002. Wrote [[plans/2026-10-08-m0-backend]]: 11 TDD tasks for Django/DRF with forced Postgres RLS, users and roles, master data, tag registry (TID/EPC/QR), C72 device PIN login, power profiles, audit, CI. M0 is split into three plans: backend first, then web and Android against its published API contract. Next: team reviews the plan, then executes it on `feat/m0-backend`.
 - 2026-10-08 · setup · `chore/project-context` — Spec-001 approved. Applied its section 10: AGENTS.md invariant 3 is now "RFID mandatory, QR only for exceptions", with a new `android` role. Rewrote product, architecture, roadmap (RFID from M1) and modules 04–08. Updated roles, non-functional, glossary, the spec template and the PR template. Added ADR-003 to ADR-006. Next: accept ADR-002, assign owners, write the M0 implementation plan.
 - 2026-10-08 · setup · `chore/project-context` — Brainstormed with web research: RFID is now **mandatory**, with QR (EPC+TID) fallback; Chainway C72 + trc-rfid; native Kotlin operator app; own-warehouse tenants first. Wrote [[specs/001-rfid-wms-pilot-design]]. Older notes still say "RFID optional" until the spec is approved and section 10 is applied.

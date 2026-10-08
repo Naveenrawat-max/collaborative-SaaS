@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="980" viewBox="0 0 1400 980">
+  <rect width="1400" height="980" fill="#f7f6f3"/>
+  <text x="40" y="42" font-family="Georgia, serif" font-size="26" fill="#1c1917">WMS — features and architecture</text>
+  <text x="40" y="66" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#57534e">Pilot is M0–M3. Portal is M4. Grey boxes are the four checks missing from the current notes.</text>
+
+  <!-- clients -->
+  <rect x="40" y="90" width="300" height="250" rx="10" fill="#fff" stroke="#1c1917" stroke-width="1.5"/>
+  <text x="56" y="116" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="#1c1917">Operator — C72</text>
+  <text x="56" y="140" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">PIN on a registered device</text>
+  <text x="56" y="162" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Trigger scan, live match list</text>
+  <text x="56" y="184" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Receive · putaway · move</text>
+  <text x="56" y="206" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Count · pick · pack · load</text>
+  <text x="56" y="228" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Find-a-tag · QR only if dead</text>
+  <text x="56" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">One confirm, txn_id, retry queue</text>
+  <text x="56" y="278" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#78716c">Raw reads stay on the device</text>
+
+  <rect x="360" y="90" width="300" height="250" rx="10" fill="#fff" stroke="#1c1917" stroke-width="1.5"/>
+  <text x="376" y="116" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="#1c1917">Back office — web</text>
+  <text x="376" y="140" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Admin / manager session</text>
+  <text x="376" y="162" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Users, warehouses, locations</text>
+  <text x="376" y="184" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">ASN, orders, appointments</text>
+  <text x="376" y="206" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Approve short, count, adjustment</text>
+  <text x="376" y="228" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Dock board · exception inbox</text>
+  <text x="376" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Audit · QR-fallback rate</text>
+  <text x="376" y="278" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#78716c">Hiding a button is not auth</text>
+
+  <rect x="680" y="90" width="300" height="250" rx="10" fill="#fff" stroke="#1c1917" stroke-width="1.5"/>
+  <text x="696" y="116" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="#1c1917">Bench + door</text>
+  <text x="696" y="140" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Desk reader: authenticate tag</text>
+  <text x="696" y="162" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Chip must match printed QR</text>
+  <text x="696" y="184" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Bind location tags at setup</text>
+  <text x="696" y="206" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Pack station: read new pallet tag</text>
+  <text x="696" y="228" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">M4 portal: in/out, one event</text>
+  <text x="696" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Direction + stray filter</text>
+  <text x="696" y="278" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#78716c">Same confirm API as the handheld</text>
+
+  <rect x="1000" y="90" width="360" height="250" rx="10" fill="#fff" stroke="#1c1917" stroke-width="1.5"/>
+  <text x="1016" y="116" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="#1c1917">Not in the pilot</text>
+  <text x="1016" y="140" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Carton / item tags</text>
+  <text x="1016" y="162" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Writing tags, live floor map</text>
+  <text x="1016" y="184" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Forklift auto-putaway</text>
+  <text x="1016" y="206" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Billing, TMS, EDI, slotting</text>
+  <text x="1016" y="228" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Wave picking, client portal</text>
+  <text x="1016" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#44403c">Customer returns — Later</text>
+  <text x="1016" y="278" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#78716c">ERP API and dashboards are M5</text>
+
+  <!-- arrow -->
+  <polygon points="700,360 712,348 688,348" fill="#1c1917"/>
+  <line x1="700" y1="348" x2="700" y2="378" stroke="#1c1917" stroke-width="1.5"/>
+  <text x="716" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#1c1917">HTTPS JSON /api/v1 — confirmed transactions only</text>
+
+  <!-- server -->
+  <rect x="40" y="390" width="1320" height="230" rx="10" fill="#1c1917"/>
+  <text x="60" y="418" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="700" fill="#fafaf9">Django + DRF — one movement service</text>
+  <text x="60" y="444" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#d6d3d1">Resolve tag in this tenant → bind pallet → move stock → write Scan → return a result per tag. Same txn_id applies once.</text>
+
+  <rect x="60" y="464" width="200" height="130" rx="8" fill="#292524"/>
+  <text x="74" y="488" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#fafaf9">Tenancy</text>
+  <text x="74" y="510" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#d6d3d1">Tenant, user, role</text>
+  <text x="74" y="528" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#d6d3d1">Warehouse access</text>
+  <text x="74" y="546" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#d6d3d1">RLS on every row</text>
+  <text x="74" y="564" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#d6d3d1">Audit log</text>
+
+  <rect x="280" y="464" width="200" height="130" rx="8" fill="#292524"/>
+  <text x="294" y="488" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#fafaf9">Master data</text>
+  <text x="294" y="510" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#d6d3d1">Zone, location, dock</text>
+  <text x="294" y="528" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#d6d3d1">Item, lot flag, partner</text>
+  <text x="294" y="546" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#d6d3d1">owner on stock</text>
+  <text x="294" y="564" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#d6d3d1">CSV import</text>
+
+  <rect x="500" y="464" width="220" height="130" rx="8" fill="#292524"/>
+  <text x="514" y="488" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#fafaf9">Tag registry</text>
+  <text x="514" y="510" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#d6d3d1">TID identity, EPC label</text>
+  <text x="514" y="528" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#d6d3d1">Bind pallet or location</text>
+  <text x="514" y="546" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#d6d3d1">Conflict, retire, QR reason</text>
+  <text x="514" y="564" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#d6d3d1">Power profiles</text>
+
+  <rect x="740" y="464" width="280" height="130" rx="8" fill="#44403c"/>
+  <text x="754" y="488" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#fafaf9">Stock — only via movement</text>
+  <text x="754" y="510" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#e7e5e4">Location × item × lot × pallet</text>
+  <text x="754" y="528" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#e7e5e4">Never negative, append-only</text>
+  <text x="754" y="546" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#e7e5e4">Hold, quarantine, allocated</text>
+  <text x="754" y="564" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#e7e5e4">Last-seen stamped here</text>
+
+  <rect x="1040" y="464" width="290" height="130" rx="8" fill="#44403c"/>
+  <text x="1054" y="488" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#fafaf9">Exceptions — no silent drop</text>
+  <text x="1054" y="510" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#e7e5e4">Unknown, conflict, unexpected</text>
+  <text x="1054" y="528" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#e7e5e4">Missing, unreadable, stray</text>
+  <text x="1054" y="546" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#e7e5e4">Wrong place · stuck · hold escape</text>
+  <text x="1054" y="564" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#e7e5e4">Expected vs seen, list filled in</text>
+
+  <!-- flow -->
+  <text x="40" y="658" font-family="Georgia, serif" font-size="18" fill="#1c1917">Day flow</text>
+
+  <rect x="40" y="676" width="150" height="64" rx="8" fill="#fff" stroke="#1c1917"/>
+  <text x="52" y="702" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1c1917">Gate</text>
+  <text x="52" y="722" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#44403c">Appointment, yard</text>
+
+  <rect x="210" y="676" width="160" height="64" rx="8" fill="#fff" stroke="#1c1917"/>
+  <text x="222" y="702" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1c1917">Receive</text>
+  <text x="222" y="722" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#44403c">ASN sweep, bind</text>
+
+  <rect x="390" y="676" width="160" height="64" rx="8" fill="#fff" stroke="#1c1917"/>
+  <text x="402" y="702" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1c1917">Putaway</text>
+  <text x="402" y="722" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#44403c">Pallet + location</text>
+
+  <rect x="570" y="676" width="160" height="64" rx="8" fill="#fff" stroke="#1c1917"/>
+  <text x="582" y="702" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1c1917">Store</text>
+  <text x="582" y="722" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#44403c">Count, hold, move</text>
+
+  <rect x="750" y="676" width="160" height="64" rx="8" fill="#fff" stroke="#1c1917"/>
+  <text x="762" y="702" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1c1917">Pick / pack</text>
+  <text x="762" y="722" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#44403c">Both tags, new tag</text>
+
+  <rect x="930" y="676" width="160" height="64" rx="8" fill="#fff" stroke="#1c1917"/>
+  <text x="942" y="702" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1c1917">Load</text>
+  <text x="942" y="722" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#44403c">Vs shipment, gate-out</text>
+
+  <rect x="1110" y="676" width="250" height="64" rx="8" fill="#e7e5e4" stroke="#1c1917"/>
+  <text x="1122" y="702" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1c1917">M4 door</text>
+  <text x="1122" y="722" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#44403c">Match books itself</text>
+
+  <!-- add -->
+  <text x="40" y="786" font-family="Georgia, serif" font-size="18" fill="#1c1917">Add — not new screens</text>
+  <rect x="40" y="802" width="300" height="70" rx="8" fill="#fff" stroke="#a8a29e"/>
+  <text x="54" y="828" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1c1917">Authenticate before issue</text>
+  <text x="54" y="850" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#44403c">Desk read vs QR, then unassigned</text>
+
+  <rect x="360" y="802" width="300" height="70" rx="8" fill="#fff" stroke="#a8a29e"/>
+  <text x="374" y="828" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1c1917">Last-seen + wrong place</text>
+  <text x="374" y="850" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#44403c">Stamped on confirm. Manager inbox only</text>
+
+  <rect x="680" y="802" width="300" height="70" rx="8" fill="#fff" stroke="#a8a29e"/>
+  <text x="694" y="828" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1c1917">Expected vs seen</text>
+  <text x="694" y="850" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#44403c">Missing tags listed. Sweep or mark short</text>
+
+  <rect x="1000" y="802" width="360" height="70" rx="8" fill="#fff" stroke="#a8a29e"/>
+  <text x="1014" y="828" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1c1917">Pack confirm · retag · returnable</text>
+  <text x="1014" y="850" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#44403c">Read the new tag. Retire+bind in one step</text>
+
+  <text x="40" y="920" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#57534e">Postgres holds tenant-scoped rows. Platform staff use Django admin only. Three devs: A yard/inbound/putaway, B master/inventory/RFID, C tenancy/outbound/integrations.</text>
+  <text x="40" y="944" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#57534e">Success: four weeks, no paper, every pallet registered, location accuracy ≥ 99%, QR fallback < 2%, zero cross-tenant access.</text>
+</svg>
