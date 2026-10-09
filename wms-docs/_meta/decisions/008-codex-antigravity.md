@@ -52,7 +52,11 @@ rules remain in force. Teammate approval is still required before DevOps merges.
 On 2026-10-09, `agy --help` verified conversation, print, JSON, model, add-dir and
 sandbox flags; `agy models` listed Gemini 3.8 Flash High. The mandatory and review
 skills were installed from pinned allowlisted sources. Runtime bootstrap/review
-results and exact approved candidate belong in the PR for this iteration:
+results and exact approved candidate belong in the PR for this iteration. The
+OS rejected Antigravity sandbox execution on this PC; read-only plan-mode reviews
+may use normal permissions with host per-command approval. Feature execution
+requires working isolation or human-authorized alternative execution. Recovery:
+
 [[collaboration/iterations/001-collaboration-bootstrap]]. End-to-end worker
 implementation and ADR-007's larger concurrency remain future pilot checks.
 

@@ -82,9 +82,30 @@ Mailbox paths: `.agents/inbox/codex/`, `.agents/inbox/antigravity/`,
 `.agents/skills/` is tracked. An inbox file does not wake the worker: Codex must
 explicitly invoke `agy` with the brief, then read its report. Never launch duplicate
 turns on the same conversation. For implementation use the verified CLI edit mode
-and the assigned worktree only; retain sandbox and permissions. No permission-
-bypass flags or speculative bridge daemon. Native skill discovery is optional:
+and the assigned worktree only; retain permission checks and use a working
+OS sandbox. No permission-bypass flags or speculative bridge daemon. Native skill discovery is optional:
 explicit reads of the installed skill files satisfy the other-agent procedure.
+
+### Observed Windows limitation
+
+On this PC the sandbox reported: `exebox: sandboxing on Windows requires Windows
+11 24H2 or later with the August 2026 or later update`; process security
+environments are unsupported. Flag availability did not prove sandbox execution
+worked. Stop on that error; do not keep polling or claim validation succeeded.
+
+For authorized read-only reviews, invoke `agy --mode plan` with normal CLI
+permission checks under the host's per-command approval mechanism. Omit the
+unsupported `--sandbox` only for that bounded read-only run; retain every normal
+permission prompt. Do not turn this into unrestricted worker implementation or
+use `--dangerously-skip-permissions`. Feature execution remains blocked until a
+working sandbox or a human-authorized per-command alternative is established.
+Do not upgrade Windows or change security settings as part of a feature task.
+
+A CLI `status: SUCCESS` or a partial response after `--print-timeout` does not
+mean the task finished. Inspect the response for the actual verdict/check results.
+Allow at most one targeted continuation to collect a pending check; if it still
+fails, record a blocker instead of entering repeated wait/tool loops. The same
+conversation ID is kept throughout recovery.
 
 ## Worker model
 
