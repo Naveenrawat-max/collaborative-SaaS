@@ -61,3 +61,4 @@ procedures are in `SKILL.md` (both at the repo root).
 - [[collaboration/safe-publishing]] — compare and preserve concurrent changes before push
 - [[collaboration/skills]] — required skills and verified installation
 - [[collaboration/iterations/001-collaboration-bootstrap]] — setup evidence and next pilot
+- [[collaboration/iterations/002-native-terminal]] — native-terminal authorization; sandbox optional

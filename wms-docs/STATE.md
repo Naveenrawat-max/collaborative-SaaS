@@ -11,7 +11,7 @@ tags:
 **Read this first, every session. Update it at every handoff** (procedure C2 in
 `SKILL.md`). Each dev edits only their own lines, and the Log is append-only.
 
-- **Version:** 0.1.8 (see `VERSION`)
+- **Version:** 0.1.9 (see `VERSION`)
 - **Phase:** 0 — project setup. No application code yet.
 - **Master design:** [[specs/001-rfid-wms-pilot-design]] (approved 2026-10-08). RFID is mandatory, with a QR (EPC+TID) fallback.
 - **Stack:** Django + DRF + PostgreSQL · React back office · native Kotlin app on Chainway C72 with trc-rfid.
@@ -70,6 +70,8 @@ _None._
 
 ## Done
 
+- 2026-10-09 · Harshit — Native-terminal implementation and review authorized; sandbox optional: [[collaboration/iterations/002-native-terminal]] on `docs/codex-antigravity` / PR #4.
+
 - 2026-10-09 · Harshit — Collaboration rules documented on `docs/codex-antigravity`: [[collaboration/iterations/001-collaboration-bootstrap]]. Shared-rule proposal awaits teammate approval/DevOps merge; final independent review and publication evidence are in that branch's PR.
 
 - 2026-10-09 — Spec-002 approved and applied: modules 04/06/07/08/10, glossary, roadmap; M0 backend plan gained Tasks 10–13 (tag intake, exception cases).
@@ -80,6 +82,8 @@ _None._
 - 2026-10-08 — Project context scaffold: AGENTS.md, SKILL.md, the `wms-docs` vault, ADR-001, ADR-002 (proposed).
 
 ## Log (newest first)
+
+- 2026-10-09 · Harshit · `docs/codex-antigravity` — Recorded native-terminal authorization and optional sandboxing in [[collaboration/iterations/002-native-terminal]]. Normal permissions, isolated worktrees and cross-review remain required. VERSION 0.1.9; next: teammate approval/DevOps merge and the bounded worker pilot.
 
 - 2026-10-09 · Harshit · `docs/codex-antigravity` — Added [[_meta/decisions/008-codex-antigravity]], workstation profile, compact collaboration skill, installed mandatory/review skills, and safe publishing with comparison of concurrent changes. VERSION 0.1.8 is the serial docs-bootstrap bump; parallel features retain the DevOps-at-merge exception. Next: teammate approval, then one bounded worker implementation and reciprocal review. Existing team/module entries preserved.
 

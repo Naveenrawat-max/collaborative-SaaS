@@ -19,7 +19,8 @@ from the repository root of the assigned worktree, not the current shell directo
 Codex leads; Antigravity works and reviews. Use the saved exact worker conversation
 and a verified Gemini Flash High model. Keep one bounded worker task active.
 Work in isolated `../wms-wt/` feature/review worktrees; only the lead edits shared
-files. Preserve normal permissions; follow the profile's observed OS-sandbox limitation. Save durable decisions, contracts,
+files. Native-terminal execution is allowed; sandboxing is optional. Preserve
+normal permissions. Save durable decisions, contracts,
 checks and next steps in committed notes; runtime IDs/mailboxes stay ignored.
 
 Check Codex usage before dispatch/review/push: >=90% of the five-hour allowance
