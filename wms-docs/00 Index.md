@@ -37,6 +37,7 @@ procedures are in `SKILL.md` (both at the repo root).
 - [[_meta/decisions/005-tag-identity-epc-tid-qr]] — TID = identity, EPC = label ID, QR carries both (accepted)
 - [[_meta/decisions/006-own-warehouse-tenants-first]] — own-warehouse tenants first, `owner` field for 3PL (accepted)
 - [[_meta/decisions/007-parallel-agents-claude-grok]] — Claude Code (lead) + Grok Build (worker) in parallel, cross-review (proposed)
+- [[_meta/decisions/008-codex-antigravity]] — Codex lead + Antigravity worker, shared publishing and usage reserve (proposed)
 - [[_meta/decisions/000-template]] — copy this for new ADRs
 
 ## Specs
@@ -52,3 +53,11 @@ procedures are in `SKILL.md` (both at the repo root).
 ## Meta
 
 - [[_meta/Conventions]] — how notes in this vault are written
+
+
+## Collaboration
+
+- [[collaboration/codex-antigravity]] — Harshit's workstation roles, conversation, model and usage policy
+- [[collaboration/safe-publishing]] — compare and preserve concurrent changes before push
+- [[collaboration/skills]] — required skills and verified installation
+- [[collaboration/iterations/001-collaboration-bootstrap]] — setup evidence and next pilot

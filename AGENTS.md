@@ -58,7 +58,8 @@ machine. So:
 ## 3. Session protocol (every agent, every time)
 
 **Start of a session**, before writing any code:
-1. `git pull` on your branch, and rebase on `main` if it moved.
+1. Inspect local work, fetch and compare remote changes, then integrate safely
+   using `SKILL.md` C7. Never rewrite a published branch to catch up with `main`.
 2. Read `wms-docs/STATE.md`, the spec for your task, and any ADRs it links to.
 3. Run the capability check in `SKILL.md`, including the **mandatory skills**:
    **karpathy-guidelines** and **ponytail**. Install them if missing, and apply both
@@ -148,7 +149,7 @@ Each role ends with a HANDOFF block, and the next role builds against its
     with …" lines in commits, PRs, or docs. Commits are authored by the developer.
 11. **Merge conflicts in `STATE.md`**: keep both sides. Each dev edits only their
     own lines, and log entries are append-only.
-12. **Parallel agents** (two agents on one machine, ADR-007, `SKILL.md` C6):
+12. **Parallel agents** (two agents on one machine, ADR-007/ADR-008, `SKILL.md` C6/C7):
     - One feature = one branch = one git worktree under `../wms-wt/`. Never edit the
       main checkout or another agent's worktree.
     - Only the lead edits shared files (`STATE.md`, `VERSION`, `backend/config/*`,
@@ -156,6 +157,16 @@ Each role ends with a HANDOFF block, and the next role builds against its
     - No branch is pushed until **the other agent** has reviewed it and run its tests.
     - Agents never merge into `main`. DevOps merges, and in a parallel run DevOps
       bumps `VERSION` at merge time.
+
+13. **Preserve concurrent work before every push.** Follow `SKILL.md` C7 and
+    `wms-docs/collaboration/safe-publishing.md`: fetch, compare our changes with
+    teammates' changes, integrate by intent, validate and (in paired sessions)
+    cross-review the final candidate. Never overwrite features, force-push, or treat chat as durable context.
+14. **Workstation profiles.** Agents are each developer's choice. Harshit uses
+    Codex (lead) + Antigravity (worker), per ADR-008 and
+    `wms-docs/collaboration/codex-antigravity.md`. Both load mandatory skills,
+    cross-review each iteration, reuse the worker conversation, and follow its
+    model and Codex usage-reserve policy. Other developers retain their own tools.
 
 ## 7. Gates — when a task is done
 
@@ -167,6 +178,7 @@ Each role ends with a HANDOFF block, and the next role builds against its
 - [ ] Lint and typecheck clean (once tooling exists).
 - [ ] Spec, ADR, and `STATE.md` updated in the same branch.
 - [ ] `VERSION` bumped.
+- [ ] Remote changes compared/integrated; final candidate reviewed; iteration context committed.
 - [ ] Vault notes follow section 8; `python tools/vaultify.py sync` run if code changed.
 
 ## 8. Docs vault rules (`wms-docs/` is an Obsidian vault)

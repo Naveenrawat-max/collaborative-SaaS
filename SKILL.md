@@ -7,7 +7,7 @@
 Contents:
 - **A.** Capability check — run at the start of every task
 - **B.** Skill registry — which skill to use for which kind of work
-- **C.** Procedures: start session · handoff · write ADR · write spec · open PR · parallel agents
+- **C.** Procedures: start session · handoff · write ADR · write spec · open PR · parallel agents · safe publication / workstation profiles
 
 ---
 
@@ -64,7 +64,8 @@ If anything looks suspicious, don't run it — report it.
 | Planning a feature, writing a spec or plan, TDD, code review, debugging | **superpowers** (brainstorming, writing-plans, test-driven-development, systematic-debugging, requesting-code-review) | `obra/superpowers` |
 | **Every task (mandatory)**: keeping code minimal, avoiding over-engineering | **ponytail** | `DietrichGebert/ponytail` |
 | **Every task (mandatory)**: think before coding, simplicity, surgical changes, verifiable goals | **karpathy-guidelines** | `forrestchang/andrej-karpathy-skills` |
-| Two agents building in parallel | procedure C6 below | in repo |
+| Two agents building in parallel | C6 (Claude/Grok) or C7 + the Codex/Antigravity profile | in repo |
+| Codex/Antigravity coordination, recovery and publishing | `.agents/skills/wms-collaboration/SKILL.md` | project-owned; procedures in `wms-docs/collaboration/` |
 | Docs vault notes | Section 8 of `AGENTS.md` + `tools/vaultify.py` | in repo |
 | _Django / DRF patterns_ | _<add a vetted skill>_ | _<source>_ |
 | _PostgreSQL schema, indexes, row-level security_ | _<add a vetted skill>_ | _<source>_ |
@@ -83,13 +84,18 @@ coding, write the test first, and find the root cause before fixing a bug.
 
 ### C1. Start a session
 ```bash
-git checkout <your-branch> && git pull
-git fetch origin && git rebase origin/main      # stay current with teammates
+git status --short                         # preserve existing work first
+git fetch origin --prune
+# Select your existing feature worktree; inspect both diffs using C7 before integration.
 ```
 Then read, in order:
 1. `wms-docs/STATE.md` — what's in progress, who owns what, blockers
 2. the spec for your task in `wms-docs/specs/`
 3. the ADRs that spec links to
+
+Use C7 to inspect divergence and integrate fetched commits. Use `git pull --ff-only`
+only after checking the upstream and preserving local changes. Never rebase a
+published branch or force-push it.
 
 Then post your classification (AGENTS.md section 4) before writing code.
 
@@ -104,11 +110,14 @@ This is how context reaches the other two devs. Do all six steps:
      `- YYYY-MM-DD · <dev> · <branch> — <what changed, why, what's next>`
 2. **Write an ADR** for any decision made this session (C3).
 3. **Update the spec** if behavior differs from what it says.
-4. **Bump `VERSION`**: patch for fixes and docs, minor for features.
+4. **Version the iteration**: serial changes bump `VERSION` (patch for fixes/docs,
+   minor for features). Parallel feature branches defer the bump to DevOps at
+   merge, per ADR-007; explain that exception in the PR.
 5. **Sync the vault** if code changed: `python tools/vaultify.py sync wms-docs`
-6. **Commit and push code and context together:**
+6. **Commit and push code and context together**, following C7 before the push
+   and requiring the other agent's review in paired sessions:
    ```bash
-   git add -A
+   git add <named-task-paths>          # never stage another person's work
    git status                       # check: no .env, no secrets, no stray files
    git commit -m "<type>(<scope>): <summary>"
    git push -u origin HEAD
@@ -213,3 +222,25 @@ per machine.
 - Push, then open the PR (C5). DevOps merges it.
 - In a parallel run, feature PRs don't bump `VERSION`; DevOps does it at merge time (ADR-007).
 - Remove the worktree after the merge: `git worktree remove ../wms-wt/feat-<module>-<thing>`.
+
+
+### C7. Safe publication and Codex/Antigravity profile
+
+The shared publishing procedure is `wms-docs/collaboration/safe-publishing.md`.
+Read it before every push: fetch and compare both diffs, integrate concurrent
+work without dropping either feature, record conflict decisions, validate,
+cross-review the final candidate, fetch again, and push without rewriting history.
+A blocked review/integration means checkpoint locally and record the blocker.
+Complete each reviewed iteration with its context and a branch push/PR.
+
+On Harshit's workstation, use `wms-docs/collaboration/codex-antigravity.md` instead
+of C6's Claude/Grok-specific commands. Codex is lead, Antigravity is worker and
+reviewer. Keep C6's briefs, path ownership, isolated worktrees, cross-review and
+two-round escalation. Skills/install provenance are in
+`wms-docs/collaboration/skills.md`; the discoverable compact entrypoint is
+`.agents/skills/wms-collaboration/SKILL.md`. Read those files explicitly if a
+harness does not discover them. Reuse the saved exact Antigravity conversation,
+verify its model with `agy models`, and enforce the Codex 90% / 40-minute reserve.
+Runtime sessions and mailboxes are ignored; `.agents/skills/` is tracked.
+Record iteration outcomes in `wms-docs/collaboration/iterations/` and link them
+from STATE and the vault index. The PR holds final review SHA/verdict and checks.
