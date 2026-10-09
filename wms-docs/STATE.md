@@ -11,7 +11,7 @@ tags:
 **Read this first, every session. Update it at every handoff** (procedure C2 in
 `SKILL.md`). Each dev edits only their own lines, and the Log is append-only.
 
-- **Version:** 0.1.7 (see `VERSION`)
+- **Version:** 0.1.9 (see `VERSION`)
 - **Phase:** 0 — project setup. No application code yet.
 - **Master design:** [[specs/001-rfid-wms-pilot-design]] (approved 2026-10-08). RFID is mandatory, with a QR (EPC+TID) fallback.
 - **Stack:** Django + DRF + PostgreSQL · React back office · native Kotlin app on Chainway C72 with trc-rfid.
@@ -30,6 +30,10 @@ Proposed split (agree, then fill in the table above). Details: [[roadmap]].
 - **B**: modules 02 master data, 06 inventory, 08 RFID
 - **C**: modules 01 tenancy/users, 07 outbound, 09 integrations
 - Shared: module 10 reporting/audit
+
+## Workstation profiles
+
+- **Harshit:** Codex lead + Antigravity worker; [[collaboration/codex-antigravity]]. Runtime conversation ID is local; committed notes and PRs carry shared context. Other developers retain their chosen tools.
 
 ## In progress
 
@@ -66,6 +70,10 @@ _None._
 
 ## Done
 
+- 2026-10-09 · Harshit — Native-terminal implementation and review authorized; sandbox optional: [[collaboration/iterations/002-native-terminal]] on `docs/codex-antigravity` / PR #4.
+
+- 2026-10-09 · Harshit — Collaboration rules documented on `docs/codex-antigravity`: [[collaboration/iterations/001-collaboration-bootstrap]]. Shared-rule proposal awaits teammate approval/DevOps merge; final independent review and publication evidence are in that branch's PR.
+
 - 2026-10-09 — Spec-002 approved and applied: modules 04/06/07/08/10, glossary, roadmap; M0 backend plan gained Tasks 10–13 (tag intake, exception cases).
 - 2026-10-08 — ADR-002 (tenancy) accepted. M0 backend implementation plan written: [[plans/2026-10-08-m0-backend]].
 - 2026-10-08 — Spec-001 approved. Notes aligned (RFID mandatory, QR fallback), ADR-003 to ADR-006 written.
@@ -74,6 +82,10 @@ _None._
 - 2026-10-08 — Project context scaffold: AGENTS.md, SKILL.md, the `wms-docs` vault, ADR-001, ADR-002 (proposed).
 
 ## Log (newest first)
+
+- 2026-10-09 · Harshit · `docs/codex-antigravity` — Recorded native-terminal authorization and optional sandboxing in [[collaboration/iterations/002-native-terminal]]. Normal permissions, isolated worktrees and cross-review remain required. VERSION 0.1.9; next: teammate approval/DevOps merge and the bounded worker pilot.
+
+- 2026-10-09 · Harshit · `docs/codex-antigravity` — Added [[_meta/decisions/008-codex-antigravity]], workstation profile, compact collaboration skill, installed mandatory/review skills, and safe publishing with comparison of concurrent changes. VERSION 0.1.8 is the serial docs-bootstrap bump; parallel features retain the DevOps-at-merge exception. Next: teammate approval, then one bounded worker implementation and reciprocal review. Existing team/module entries preserved.
 
 - 2026-10-09 · setup · `docs/parallel-agents` — Wrote ADR-007 (proposed): Claude Code as lead, Grok Build as worker, one feature per branch and worktree, `.agents/` mailbox, cross-review before push, DevOps merges and bumps VERSION in parallel runs. Added SKILL.md C6 and made karpathy-guidelines + ponytail mandatory for every agent (AGENTS.md §3, §6.12, §7). Next: pilot one feature per agent.
 - 2026-10-09 · setup · `chore/project-context` — Spec-002 approved. Notes updated per its §13. M0 backend plan now 15 tasks: new Tasks 10–13 add `TagBatch` + tag verification/last-seen fields, the `exceptions` app (`open_case`/`close_cases`, inbox API), supplier CSV import, bench checks with quarantine, and verification on first close-read bind. Next: team reviews the plan, then executes it on `feat/m0-backend`.
